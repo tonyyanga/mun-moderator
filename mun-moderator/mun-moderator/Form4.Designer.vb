@@ -29,7 +29,7 @@ Partial Class Form4
         '
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(262, 238)
+        Me.RichTextBox1.Size = New System.Drawing.Size(707, 505)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
@@ -37,7 +37,7 @@ Partial Class Form4
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(286, 262)
+        Me.ClientSize = New System.Drawing.Size(731, 529)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Name = "Form4"
         Me.Text = "Display"

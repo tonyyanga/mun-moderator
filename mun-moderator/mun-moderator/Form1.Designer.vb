@@ -23,22 +23,22 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -57,14 +57,23 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Information"
         '
-        'Button1
+        'Button14
         '
-        Me.Button1.Location = New System.Drawing.Point(6, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(110, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Conference Info"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button14.Location = New System.Drawing.Point(121, 49)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(110, 23)
+        Me.Button14.TabIndex = 3
+        Me.Button14.Text = "Add File"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(6, 49)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(110, 23)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Countries"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -75,14 +84,14 @@ Partial Class Form1
         Me.Button2.Text = "Session Info"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Button3
+        'Button1
         '
-        Me.Button3.Location = New System.Drawing.Point(6, 49)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 23)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Countries"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button1.Location = New System.Drawing.Point(6, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(110, 23)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Conference Info"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -104,86 +113,14 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Procedures"
         '
-        'Button4
+        'Button15
         '
-        Me.Button4.Location = New System.Drawing.Point(6, 20)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(110, 23)
-        Me.Button4.TabIndex = 3
-        Me.Button4.Text = "Roll Call"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(121, 20)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(110, 23)
-        Me.Button5.TabIndex = 4
-        Me.Button5.Text = "Speakers List"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(6, 49)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(110, 23)
-        Me.Button6.TabIndex = 5
-        Me.Button6.Text = "Moderated Caucus"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(121, 49)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(110, 23)
-        Me.Button7.TabIndex = 6
-        Me.Button7.Text = "Free Caucus"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
-        'Button8
-        '
-        Me.Button8.Location = New System.Drawing.Point(6, 78)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(110, 23)
-        Me.Button8.TabIndex = 7
-        Me.Button8.Text = "Prolong Caucus"
-        Me.Button8.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(122, 78)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(110, 23)
-        Me.Button9.TabIndex = 8
-        Me.Button9.Text = "Prolong SL time"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(6, 107)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(110, 23)
-        Me.Button10.TabIndex = 9
-        Me.Button10.Text = "Suspend meeting"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(121, 107)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(110, 23)
-        Me.Button11.TabIndex = 10
-        Me.Button11.Text = "Intro WP"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
-        'Button12
-        '
-        Me.Button12.Location = New System.Drawing.Point(6, 136)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(110, 23)
-        Me.Button12.TabIndex = 11
-        Me.Button12.Text = "Intro Amendment"
-        Me.Button12.UseVisualStyleBackColor = True
+        Me.Button15.Location = New System.Drawing.Point(6, 165)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(110, 23)
+        Me.Button15.TabIndex = 13
+        Me.Button15.Text = "Close Debate"
+        Me.Button15.UseVisualStyleBackColor = True
         '
         'Button13
         '
@@ -194,23 +131,86 @@ Partial Class Form1
         Me.Button13.Text = "Intro DR/DD"
         Me.Button13.UseVisualStyleBackColor = True
         '
-        'Button14
+        'Button12
         '
-        Me.Button14.Location = New System.Drawing.Point(121, 49)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(110, 23)
-        Me.Button14.TabIndex = 3
-        Me.Button14.Text = "Add File"
-        Me.Button14.UseVisualStyleBackColor = True
+        Me.Button12.Location = New System.Drawing.Point(6, 136)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(110, 23)
+        Me.Button12.TabIndex = 11
+        Me.Button12.Text = "Intro Amendment"
+        Me.Button12.UseVisualStyleBackColor = True
         '
-        'Button15
+        'Button11
         '
-        Me.Button15.Location = New System.Drawing.Point(6, 165)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(110, 23)
-        Me.Button15.TabIndex = 13
-        Me.Button15.Text = "Close Debate"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.Button11.Location = New System.Drawing.Point(121, 107)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(110, 23)
+        Me.Button11.TabIndex = 10
+        Me.Button11.Text = "Intro WP"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(6, 107)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(110, 23)
+        Me.Button10.TabIndex = 9
+        Me.Button10.Text = "Suspend meeting"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(122, 78)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(110, 23)
+        Me.Button9.TabIndex = 8
+        Me.Button9.Text = "Prolong SL time"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(6, 78)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(110, 23)
+        Me.Button8.TabIndex = 7
+        Me.Button8.Text = "Prolong Caucus"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(121, 49)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(110, 23)
+        Me.Button7.TabIndex = 6
+        Me.Button7.Text = "Free Caucus"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(6, 49)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(110, 23)
+        Me.Button6.TabIndex = 5
+        Me.Button6.Text = "Moderated Caucus"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(121, 20)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(110, 23)
+        Me.Button5.TabIndex = 4
+        Me.Button5.Text = "Speakers List"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(6, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(110, 23)
+        Me.Button4.TabIndex = 3
+        Me.Button4.Text = "Roll Call"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Label1
         '

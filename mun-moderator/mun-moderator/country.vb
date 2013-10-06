@@ -3,6 +3,9 @@
     Friend ordered As Boolean
     Friend note As String = ""
     Private toclose As Boolean = False
+    Sub close()
+        countryform.Close()
+    End Sub
     Friend Sub Init()
         If ordered Then countryform.ListBox2.Sorted = False Else countryform.ListBox2.Sorted = True
         countryform.Label1.Text = note
@@ -38,12 +41,96 @@ End Class
 Public Class country_select
     Inherits country
     Friend selected As ArrayList = New ArrayList
+    Dim Ctimer As timer = New timer
+    Dim form As New Form4
+    Friend procedure As String
     Overrides Sub save()
         For Each obj As String In countryform.ListBox2.Items
             selected.Add(obj)
         Next
         RaiseEvent finish()
         countryform.Close()
+    End Sub
+    Sub GSL_Select_Finish()
+        Dim CSL As country_select = New country_select
+        CSL.note = "Select the countries to apprehend into the list."
+        CSL.ordered = True
+        CSL.Ctimer = Ctimer
+        CSL.procedure = procedure
+        AddHandler CSL.finish, AddressOf CSL.GSL_Select_Apprehend
+        CSL.Init()
+        CSL.init2()
+        Ctimer = New timer
+        Display_list(selected, procedure, form)
+        Ctimer.list = selected
+        Select Case procedure
+            Case "General Speakers List"
+                Ctimer.speaker = CInt(InputBox("Time for each speaker?"))
+                Ctimer.type = 0
+                AddHandler Ctimer.nextspeaker, AddressOf GSL_next
+                AddHandler Ctimer.finish, AddressOf GSL_Finish
+            Case "Moderated Caucus"
+                Ctimer.total = CInt(InputBox("Total time?"))
+                Ctimer.speaker = CInt(InputBox("Time for each speaker?"))
+                Ctimer.type = 1
+                AddHandler Ctimer.nextspeaker, AddressOf MC_next
+                AddHandler Ctimer.finish, AddressOf MC_Finish
+        End Select
+
+       
+        Ctimer.init()
+    End Sub
+    Sub GSL_next()
+        Ctimer.finished.Add(Ctimer.list(Ctimer.order).ToString)
+        Ctimer.todo.Remove(Ctimer.list(Ctimer.order).ToString)
+        Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
+        If Ctimer.todo.Count > 0 Then
+            Ctimer.note = Ctimer.todo(0).ToString
+            ordered += 1
+        Else
+            Ctimer.note = "End of the list"
+            If MsgBox("The GSL is end. Close debate?", vbOKCancel, Form1.Title) = MsgBoxResult.Ok Then GSL_Finish()
+        End If
+    End Sub
+    Sub GSL_Finish()
+        Form2.Close()
+        Form1.closedebate()
+    End Sub
+    Sub MC_next()
+        Ctimer.finished.Add(Ctimer.list(Ctimer.order).ToString)
+        Ctimer.todo.Remove(Ctimer.list(Ctimer.order).ToString)
+        Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
+        If Ctimer.todo.Count > 0 Then
+            Ctimer.note = Ctimer.todo(0).ToString
+            ordered += 1
+        Else
+            Ctimer.note = "End of the list"
+            If CInt(Form5.Label4.Text) < Ctimer.speaker Then MC_Finish()
+            If MsgBox("The List is end. End the caucus?", vbOKCancel, Form1.Title) = MsgBoxResult.Ok Then MC_Finish()
+        End If
+    End Sub
+    Sub MC_Finish()
+        Form2.Close()
+        Form5.Close()
+        Form4.Close()
+    End Sub
+    Sub GSL_Select_Apprehend()
+        Ctimer.todo.AddRange(selected)
+        Ctimer.list.AddRange(selected)
+        Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
+        If Ctimer.todo.Count > 0 Then
+            Ctimer.note = Ctimer.todo(0).ToString
+            ordered += 1
+        Else
+            Ctimer.note = "End of the list"
+            If MsgBox("The list is end. End?", vbOKCancel, Form1.Title) = MsgBoxResult.Ok Then GSL_Finish()
+        End If
+        Ctimer.apprehend()
+    End Sub
+    Friend Overloads Sub init2()
+        For Each obj As String In Form1.countries
+            countryform.ListBox1.Items.Add(obj)
+        Next
     End Sub
     Event finish()
 End Class
@@ -56,42 +143,38 @@ Public Class rollcall
         Next
     End Sub
     Public Overrides Sub save()
-        Form1.countries = Nothing
+        Form1.countries = New ArrayList
         For Each obj As String In countryform.ListBox2.Items
             Form1.countries.Add(obj)
         Next
+        Form4.RichTextBox1.Text = ""
+        Form1.simplemajority = CStr(Int(IIf(Form1.countries.Count Mod 2 = 0, Form1.countries.Count / 2 + 1, Form1.countries.Count / 2 + 0.5)))
+        Form1.absolutemajority = CStr(Int(IIf(Form1.countries.Count Mod 3 = 0, 2 * Form1.countries.Count / 3, 2 * Form1.countries.Count / 3 + 1)))
+        Form4.RichTextBox1.Text = "Committee " + Form1.committee + " " + Form1.session + System.Environment.NewLine + Form1.topic + System.Environment.NewLine + System.Environment.NewLine + Form4.RichTextBox1.Text + "Simple Majority " + CStr(Form1.simplemajority) + "  Two-thirds Majority " + CStr(Form1.absolutemajority)
+        countryform.Close()
+        Form1.Conference_begin()
     End Sub
     Private Sub itemchange()
-
-        Form4.RichTextBox1.Text = "Committee " + Form1.committee + " " + Form1.session + System.Environment.NewLine + Form1.topic + System.Environment.NewLine + System.Environment.NewLine + "Roll Call"
-        Dim i As Integer, length As Integer = 0, length2 As Integer = 0
-        For i = 0 To countryform.ListBox2.Items.Count - 1
-            Form4.RichTextBox1.Text = Form4.RichTextBox1.Text + System.Environment.NewLine + countryform.ListBox2.Items(i).ToString
+        Dim box1 As ArrayList = New ArrayList
+        Dim box2 As ArrayList = New ArrayList
+        For Each obj In countryform.ListBox1.Items
+            box1.Add(obj)
         Next
-        For i = 0 To countryform.ListBox1.Items.Count - 1
-            Form4.RichTextBox1.Text = Form4.RichTextBox1.Text + System.Environment.NewLine + countryform.ListBox1.Items(i).ToString
+        For Each obj In countryform.ListBox2.Items
+            box2.Add(obj)
         Next
-        For i = 0 To 3
-            length += Form4.RichTextBox1.Lines(i).Length
-        Next
-        Form4.RichTextBox1.SelectionStart = 0
-        Form4.RichTextBox1.SelectionLength = length + 3
-        Form4.RichTextBox1.SelectionFont = New System.Drawing.Font(Form4.RichTextBox1.SelectionFont.Name, Form4.RichTextBox1.SelectionFont.Size, FontStyle.Bold)
-        Form4.RichTextBox1.SelectionStart = length + 3
-        For i = 4 To countryform.ListBox2.Items.Count + 3
-            length2 += Form4.RichTextBox1.Lines(i).Length
-        Next
-        length2 += countryform.ListBox2.Items.Count
-        Form4.RichTextBox1.SelectionLength = length2
-        Form4.RichTextBox1.SelectionColor = Color.Green
-        Form4.RichTextBox1.SelectionStart = length + length2 + 3
-        For i = countryform.ListBox2.Items.Count + 3 To Form4.RichTextBox1.Lines.Count - 1
-            length += Form4.RichTextBox1.Lines(i).Length
-        Next
-        Form4.RichTextBox1.SelectionLength = length
-        Form4.RichTextBox1.SelectionColor = Color.Red
-        Form4.RichTextBox1.SelectionLength = 0
-
-
+        Display.Display_Update(box2, box1, "Roll Call", Form4)
     End Sub
 End Class
+'Public Class speakerslist
+'    Inherits country
+'    Friend Property procedure As String
+'    Friend Overloads Sub init2()
+'        For Each obj As String In Form1.countries
+'            countryform.ListBox1.Items.Add(obj)
+'        Next
+'    End Sub
+'    Public Overrides Sub save()
+
+'    End Sub
+'End Class
