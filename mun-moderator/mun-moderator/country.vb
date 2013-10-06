@@ -41,8 +41,8 @@ End Class
 Public Class country_select
     Inherits country
     Friend selected As ArrayList = New ArrayList
-    Dim Ctimer As timer = New timer
-    Dim form As New Form4
+    Friend Ctimer As timer = New timer
+    Friend form As New Form4
     Friend procedure As String
     Overrides Sub save()
         For Each obj As String In countryform.ListBox2.Items
@@ -52,11 +52,13 @@ Public Class country_select
         countryform.Close()
     End Sub
     Sub GSL_Select_Finish()
-        Dim CSL As country_select = New country_select
+        Dim CSL As SL_Apprehend = New SL_Apprehend
         CSL.note = "Select the countries to apprehend into the list."
         CSL.ordered = True
         CSL.Ctimer = Ctimer
         CSL.procedure = procedure
+        CSL.form = form
+        CSL.sender = Me
         AddHandler CSL.finish, AddressOf CSL.GSL_Select_Apprehend
         CSL.Init()
         CSL.init2()
@@ -81,8 +83,8 @@ Public Class country_select
         Ctimer.init()
     End Sub
     Sub GSL_next()
-        Ctimer.finished.Add(Ctimer.list(Ctimer.order).ToString)
-        Ctimer.todo.Remove(Ctimer.list(Ctimer.order).ToString)
+        Ctimer.finished.Add(Ctimer.todo.Item(0))
+        Ctimer.todo.RemoveAt(0)
         Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
         If Ctimer.todo.Count > 0 Then
             Ctimer.note = Ctimer.todo(0).ToString
@@ -93,12 +95,12 @@ Public Class country_select
         End If
     End Sub
     Sub GSL_Finish()
-        Form2.Close()
+        Ctimer.Close()
         Form1.closedebate()
     End Sub
     Sub MC_next()
-        Ctimer.finished.Add(Ctimer.list(Ctimer.order).ToString)
-        Ctimer.todo.Remove(Ctimer.list(Ctimer.order).ToString)
+        Ctimer.finished.Add(Ctimer.todo.Item(0))
+        Ctimer.todo.RemoveAt(0)
         Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
         If Ctimer.todo.Count > 0 Then
             Ctimer.note = Ctimer.todo(0).ToString
@@ -110,22 +112,8 @@ Public Class country_select
         End If
     End Sub
     Sub MC_Finish()
-        Form2.Close()
-        Form5.Close()
-        Form4.Close()
-    End Sub
-    Sub GSL_Select_Apprehend()
-        Ctimer.todo.AddRange(selected)
-        Ctimer.list.AddRange(selected)
-        Display_Update(Ctimer.finished, Ctimer.todo, procedure, form)
-        If Ctimer.todo.Count > 0 Then
-            Ctimer.note = Ctimer.todo(0).ToString
-            ordered += 1
-        Else
-            Ctimer.note = "End of the list"
-            If MsgBox("The list is end. End?", vbOKCancel, Form1.Title) = MsgBoxResult.Ok Then GSL_Finish()
-        End If
-        Ctimer.apprehend()
+        Ctimer.Close()
+
     End Sub
     Friend Overloads Sub init2()
         For Each obj As String In Form1.countries
@@ -133,6 +121,22 @@ Public Class country_select
         Next
     End Sub
     Event finish()
+End Class
+Class SL_Apprehend
+    Inherits country_select
+    Friend sender As country_select
+    Sub GSL_Select_Apprehend()
+        sender.Ctimer.todo = selected
+        Display_Update(sender.Ctimer.finished, sender.Ctimer.todo, procedure, form)
+        If sender.Ctimer.todo.Count > 0 Then
+            sender.Ctimer.note = sender.Ctimer.todo(0).ToString
+            sender.ordered += 1
+        Else
+            sender.Ctimer.note = "End of the list"
+            If MsgBox("The list is end. End?", vbOKCancel, Form1.Title) = MsgBoxResult.Ok Then GSL_Finish()
+        End If
+        Ctimer.apprehend()
+    End Sub
 End Class
 Public Class rollcall
     Inherits country
@@ -166,15 +170,4 @@ Public Class rollcall
         Display.Display_Update(box2, box1, "Roll Call", Form4)
     End Sub
 End Class
-'Public Class speakerslist
-'    Inherits country
-'    Friend Property procedure As String
-'    Friend Overloads Sub init2()
-'        For Each obj As String In Form1.countries
-'            countryform.ListBox1.Items.Add(obj)
-'        Next
-'    End Sub
-'    Public Overrides Sub save()
 
-'    End Sub
-'End Class

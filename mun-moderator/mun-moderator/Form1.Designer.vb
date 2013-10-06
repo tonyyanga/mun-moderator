@@ -32,9 +32,6 @@ Partial Class Form1
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -99,23 +96,20 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Button13)
         Me.GroupBox2.Controls.Add(Me.Button12)
         Me.GroupBox2.Controls.Add(Me.Button11)
-        Me.GroupBox2.Controls.Add(Me.Button10)
-        Me.GroupBox2.Controls.Add(Me.Button9)
-        Me.GroupBox2.Controls.Add(Me.Button8)
         Me.GroupBox2.Controls.Add(Me.Button7)
         Me.GroupBox2.Controls.Add(Me.Button6)
         Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.Button4)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 101)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(237, 195)
+        Me.GroupBox2.Size = New System.Drawing.Size(237, 151)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Procedures"
         '
         'Button15
         '
-        Me.Button15.Location = New System.Drawing.Point(6, 165)
+        Me.Button15.Location = New System.Drawing.Point(6, 92)
         Me.Button15.Name = "Button15"
         Me.Button15.Size = New System.Drawing.Size(110, 23)
         Me.Button15.TabIndex = 13
@@ -124,7 +118,7 @@ Partial Class Form1
         '
         'Button13
         '
-        Me.Button13.Location = New System.Drawing.Point(121, 136)
+        Me.Button13.Location = New System.Drawing.Point(121, 121)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(110, 23)
         Me.Button13.TabIndex = 12
@@ -133,7 +127,7 @@ Partial Class Form1
         '
         'Button12
         '
-        Me.Button12.Location = New System.Drawing.Point(6, 136)
+        Me.Button12.Location = New System.Drawing.Point(6, 121)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(110, 23)
         Me.Button12.TabIndex = 11
@@ -142,45 +136,18 @@ Partial Class Form1
         '
         'Button11
         '
-        Me.Button11.Location = New System.Drawing.Point(121, 107)
+        Me.Button11.Location = New System.Drawing.Point(121, 92)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(110, 23)
         Me.Button11.TabIndex = 10
         Me.Button11.Text = "Intro WP"
         Me.Button11.UseVisualStyleBackColor = True
         '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(6, 107)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(110, 23)
-        Me.Button10.TabIndex = 9
-        Me.Button10.Text = "Suspend meeting"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(122, 78)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(110, 23)
-        Me.Button9.TabIndex = 8
-        Me.Button9.Text = "Prolong SL time"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button8
-        '
-        Me.Button8.Location = New System.Drawing.Point(6, 78)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(110, 23)
-        Me.Button8.TabIndex = 7
-        Me.Button8.Text = "Prolong Caucus"
-        Me.Button8.UseVisualStyleBackColor = True
-        '
         'Button7
         '
         Me.Button7.Location = New System.Drawing.Point(121, 49)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(110, 23)
+        Me.Button7.Size = New System.Drawing.Size(110, 37)
         Me.Button7.TabIndex = 6
         Me.Button7.Text = "Free Caucus"
         Me.Button7.UseVisualStyleBackColor = True
@@ -189,7 +156,7 @@ Partial Class Form1
         '
         Me.Button6.Location = New System.Drawing.Point(6, 49)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(110, 23)
+        Me.Button6.Size = New System.Drawing.Size(110, 37)
         Me.Button6.TabIndex = 5
         Me.Button6.Text = "Moderated Caucus"
         Me.Button6.UseVisualStyleBackColor = True
@@ -215,7 +182,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(62, 299)
+        Me.Label1.Location = New System.Drawing.Point(57, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(149, 12)
         Me.Label1.TabIndex = 2
@@ -225,7 +192,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(261, 320)
+        Me.ClientSize = New System.Drawing.Size(261, 277)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -243,9 +210,6 @@ Partial Class Form1
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button10 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
-    Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button

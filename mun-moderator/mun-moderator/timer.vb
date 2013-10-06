@@ -15,6 +15,7 @@
                 .Width = 563
                 .Label1.Text = speaker
                 .Label4.Text = total
+                note = list(0).ToString
             Else
                 .Label3.Visible = False
                 .Label4.Visible = False
@@ -22,16 +23,19 @@
                 If type = 0 Then
                     .Label2.Text = "Speaker"
                     .Label1.Text = speaker
+                    note = list(0).ToString
                 Else
                     .Label2.Text = "Total"
                     .Label1.Text = total
                     .Button1.Text = "Finish"
                     .Timer1.Enabled = True
+                    .Label5.Text = note
+                    AddHandler finish, AddressOf Me.Close
                 End If
             End If
             AddHandler .Timer1.Tick, AddressOf Timer
             AddHandler .Button1.Click, AddressOf button
-            note = list(0).ToString
+
             order = 0
             todo = list
             finished = New ArrayList

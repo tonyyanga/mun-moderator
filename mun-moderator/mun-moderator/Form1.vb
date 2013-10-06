@@ -12,9 +12,6 @@
         Button5.Enabled = False
         Button6.Enabled = False
         Button7.Enabled = False
-        Button8.Enabled = False
-        Button9.Enabled = False
-        Button10.Enabled = False
         Button11.Enabled = False
         Button12.Enabled = False
         Button13.Enabled = False
@@ -24,9 +21,6 @@
         Button5.Enabled = True
         Button6.Enabled = True
         Button7.Enabled = True
-        Button8.Enabled = True
-        Button9.Enabled = True
-        Button10.Enabled = True
         Button11.Enabled = True
         Button12.Enabled = True
         Button13.Enabled = True
@@ -85,6 +79,14 @@
         CSL.Init()
         CSL.init2()
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim Ctimer As timer = New timer
+        Ctimer.type = 2
+        Ctimer.total = CInt(InputBox("Total time?", Title))
+        Ctimer.note = "Unmoderated Caucus"
+        Ctimer.init()
+    End Sub
 End Class
 
 Module Display
@@ -101,44 +103,61 @@ Module Display
         Next
         form.RichTextBox1.SelectionStart = 0
         form.RichTextBox1.SelectionLength = length + 3
-        form.RichTextBox1.SelectionFont = New System.Drawing.Font(form.RichTextBox1.SelectionFont.Name, form.RichTextBox1.SelectionFont.Size + 3, FontStyle.Bold)
+        form.RichTextBox1.SelectionFont = New System.Drawing.Font(form.RichTextBox1.SelectionFont.Name, 15, FontStyle.Bold)
         form.RichTextBox1.SelectionStart = length + 3
         For i = 4 To form.RichTextBox1.Lines.Count - 1
             length += form.RichTextBox1.Lines(i).Length
         Next
         form.RichTextBox1.SelectionLength = length
+        form.RichTextBox1.SelectionFont = New System.Drawing.Font(form.RichTextBox1.SelectionFont.Name, 15, FontStyle.Regular)
         form.RichTextBox1.SelectionColor = Color.Red
         form.RichTextBox1.SelectionLength = 0
     End Sub
     Sub Display_Update(Finish As ArrayList, Notfinish As ArrayList, note As String, form As Form4)
-        form.RichTextBox1.Text = ""
-        form.RichTextBox1.Text = "Committee " + Form1.committee + " " + Form1.session + System.Environment.NewLine + Form1.topic + System.Environment.NewLine + System.Environment.NewLine + "Roll Call"
-        Dim i As Integer, length As Integer = 0, length2 As Integer = 0
-        For i = 0 To Finish.Count - 1
-            form.RichTextBox1.Text = form.RichTextBox1.Text + System.Environment.NewLine + Finish(i).ToString
-        Next
-        For i = 0 To Notfinish.Count - 1
-            form.RichTextBox1.Text = form.RichTextBox1.Text + System.Environment.NewLine + Notfinish(i).ToString
-        Next
-        For i = 0 To 3
-            length += form.RichTextBox1.Lines(i).Length
-        Next
-        form.RichTextBox1.SelectionStart = 0
-        form.RichTextBox1.SelectionLength = length + 3
-        form.RichTextBox1.SelectionFont = New System.Drawing.Font(form.RichTextBox1.SelectionFont.Name, form.RichTextBox1.SelectionFont.Size, FontStyle.Bold)
-        form.RichTextBox1.SelectionStart = length + 3
-        For i = 4 To Finish.Count + 3
-            length2 += form.RichTextBox1.Lines(i).Length
-        Next
-        length2 += Finish.Count
-        form.RichTextBox1.SelectionLength = length2
-        form.RichTextBox1.SelectionColor = Color.Green
-        form.RichTextBox1.SelectionStart = length + length2 + 3
-        For i = Finish.Count + 3 To form.RichTextBox1.Lines.Count - 1
-            length += form.RichTextBox1.Lines(i).Length
-        Next
-        form.RichTextBox1.SelectionLength = length
-        form.RichTextBox1.SelectionColor = Color.Red
-        form.RichTextBox1.SelectionLength = 0
+        With form.RichTextBox1
+            Dim i As Integer, length As Integer = 0, length2 As Integer = 0
+            Dim size1 As Integer
+            Try
+                For i = 0 To 3
+                    length += .Lines(i).Length
+                Next
+                .SelectionStart = 0
+                .SelectionLength = length + 3
+                size1 = .SelectionFont.Size
+                length = 0
+            Catch ex As Exception
+                size1 = 15
+            End Try
+            .Text = ""
+            .Text = "Committee " + Form1.committee + " " + Form1.session + System.Environment.NewLine + Form1.topic + System.Environment.NewLine + System.Environment.NewLine + note
+            For i = 0 To Finish.Count - 1
+                .Text = .Text + System.Environment.NewLine + Finish(i).ToString
+            Next
+            For i = 0 To Notfinish.Count - 1
+                .Text = .Text + System.Environment.NewLine + Notfinish(i).ToString
+            Next
+            For i = 0 To 3
+                length += .Lines(i).Length
+            Next
+            .SelectionStart = 0
+            .SelectionLength = length + 3
+            .SelectionFont = New System.Drawing.Font(.SelectionFont.Name, size1, FontStyle.Bold)
+            .SelectionStart = length + 3
+            For i = 4 To Finish.Count + 3
+                length2 += .Lines(i).Length
+            Next
+            length2 += Finish.Count
+            .SelectionLength = length2
+            .SelectionColor = Color.Green
+            .SelectionFont = New System.Drawing.Font(.SelectionFont.Name, size1, FontStyle.Regular)
+            .SelectionStart = length + length2 + 3 + 1
+            For i = Finish.Count + 4 To .Lines.Count - 1
+                length += .Lines(i).Length
+            Next
+            .SelectionLength = length + Notfinish.Count
+            .SelectionColor = Color.Red
+            .SelectionFont = New System.Drawing.Font(.SelectionFont.Name, size1, FontStyle.Regular)
+            .SelectionLength = 0
+        End With
     End Sub
 End Module
