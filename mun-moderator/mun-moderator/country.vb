@@ -15,7 +15,7 @@
         AddHandler countryform.FormClosing, AddressOf closing
         countryform.Show()
     End Sub
-    Friend Sub init2()
+    Friend Overridable Sub init2()
         countryform.ListBox1.Items.AddRange(New Object() {"Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China, People's Republic of", "Colombia", "Comoros", "Congo, Democratic Republic of", "Congo, Republic of", "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia, Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia, Federated States of", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "St. Vincent and the Grenadines", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Viet Nam", "Yemen", "Zambia", "Zimbabwe"})
     End Sub
     Private Sub quit()
@@ -116,10 +116,8 @@ Public Class country_select
     Sub MC_Finish()
         Ctimer.Close()
     End Sub
-    Friend Overloads Sub init2()
-        For Each obj As String In Form1.countries
-            countryform.ListBox1.Items.Add(obj)
-        Next
+    Friend Overrides Sub init2()
+        countryform.ListBox1.Items.AddRange(Form1.countries.ToArray)
     End Sub
     Sub WP_Spon_finish()
         Display_list(selected, "Introduce " & InputBox("Name of the working paper?", Form1.Title, "Working Paper "), form)
@@ -131,9 +129,10 @@ Public Class country_select
     Sub Am_Spon_finish()
         Dim am As Amendment = New Amendment
         am.sponsors = selected
-        am.unfriendly = IIf(MsgBox("Friendly?", vbYesNo, Form1.Title), MsgBoxResult.No, MsgBoxResult.Yes)
+        am.name = InputBox("Name of the amendment?", Form1.Title, "Amendment ")
+        If MsgBox("Friendly?", vbYesNo, Form1.Title) = MsgBoxResult.No Then am.unfriendly = True Else am.unfriendly = False
         If am.unfriendly Then
-            Display_list(selected, "Introduce " & InputBox("Name of the amendment?", Form1.Title, "Amendment "), form)
+            Display_list(selected, "Introduce " & am.name, form)
             Ctimer.note = "Introduce Amendment"
             Ctimer.type = 2
             Ctimer.total = CInt(InputBox("Total time?", Form1.Title))
@@ -147,6 +146,8 @@ Public Class country_select
         CDR_Sign.note = "Select signatories"
         CDR_Sign.ordered = False
         AddHandler CDR_Sign.finish, AddressOf CDR_Sign.DR_Sign_finish
+        CDR_Sign.Init()
+        CDR_Sign.init2()
     End Sub
     Event finish()
 End Class
@@ -157,7 +158,7 @@ Class DR_Sign
         Dim dr As Resolution = New Resolution
         dr.signatories = selected
         dr.sponsors = sender.selected
-        Display_list(selected, "Introduce " & InputBox("Name of the resolution?", Form1.Title, "Draft Resolution "), form)
+        Display_list(dr.signatories, "Introduce " & InputBox("Name of the resolution?", Form1.Title, "Draft Resolution "), form)
         Ctimer.note = "Introduce Draft Resolution"
         Ctimer.type = 2
         Ctimer.total = CInt(InputBox("Total time?", Form1.Title))

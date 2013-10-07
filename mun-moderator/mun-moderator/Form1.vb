@@ -15,6 +15,7 @@
         Button11.Enabled = False
         Button12.Enabled = False
         Button13.Enabled = False
+        Button15.Enabled = False
     End Sub
     Friend Sub Conference_begin()
         Button4.Enabled = False
@@ -24,6 +25,7 @@
         Button11.Enabled = True
         Button12.Enabled = True
         Button13.Enabled = True
+        Button15.Enabled = True
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         committee = InputBox("Committee Name", Title)
@@ -48,6 +50,9 @@
         Caddfile.Init()
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        rollcall()
+    End Sub
+    Private Sub rollcall()
         Form4.Show()
         Display.Display_list(countries, "Roll Call", Form4)
         Dim Crollcall As rollcall = New rollcall
@@ -67,7 +72,20 @@
         CSL.init2()
     End Sub
     Sub closedebate()
-        
+        Button4.Enabled = False
+        Button5.Enabled = False
+        Button6.Enabled = False
+        Button7.Enabled = False
+        Button11.Enabled = False
+        Button12.Enabled = False
+        Button13.Enabled = False
+        Button15.Enabled = False
+        rollcall()
+        Dim CVote As Voting = New Voting
+        CVote.note = "Decide the order of voting."
+        CVote.ordered = True
+        CVote.Init()
+        CVote.init2()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -113,6 +131,10 @@
         CSpon.Init()
         CSpon.init2()
         AddHandler CSpon.finish, AddressOf CSpon.DR_Spon_finish
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        closedebate()
     End Sub
 End Class
 
