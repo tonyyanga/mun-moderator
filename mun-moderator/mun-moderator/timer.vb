@@ -99,8 +99,8 @@
         End With
 
     End Sub
-
     Sub Close()
         timeform.Close()
+        Me.Finalize()
     End Sub
 End Class

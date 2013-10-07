@@ -87,6 +87,33 @@
         Ctimer.note = "Unmoderated Caucus"
         Ctimer.init()
     End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Dim CSpon As country_select = New country_select
+        CSpon.note = "Select the sponsors."
+        CSpon.ordered = True
+        CSpon.Init()
+        CSpon.init2()
+        AddHandler CSpon.finish, AddressOf CSpon.WP_Spon_finish
+    End Sub
+    
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Dim CSpon As country_select = New country_select
+        CSpon.note = "Select the sponsors."
+        CSpon.ordered = True
+        CSpon.Init()
+        CSpon.init2()
+        AddHandler CSpon.finish, AddressOf CSpon.Am_Spon_finish
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        Dim CSpon As country_select = New country_select
+        CSpon.note = "Select the sponsors."
+        CSpon.ordered = True
+        CSpon.Init()
+        CSpon.init2()
+        AddHandler CSpon.finish, AddressOf CSpon.DR_Spon_finish
+    End Sub
 End Class
 
 Module Display

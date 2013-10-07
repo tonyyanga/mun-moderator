@@ -5,6 +5,7 @@
     Private toclose As Boolean = False
     Sub close()
         countryform.Close()
+        Me.Finalize()
     End Sub
     Friend Sub Init()
         If ordered Then countryform.ListBox2.Sorted = False Else countryform.ListBox2.Sorted = True
@@ -44,6 +45,7 @@ Public Class country_select
     Friend Ctimer As timer = New timer
     Friend form As New Form4
     Friend procedure As String
+    Friend sponsors As ArrayList = New ArrayList
     Overrides Sub save()
         For Each obj As String In countryform.ListBox2.Items
             selected.Add(obj)
@@ -113,14 +115,55 @@ Public Class country_select
     End Sub
     Sub MC_Finish()
         Ctimer.Close()
-
     End Sub
     Friend Overloads Sub init2()
         For Each obj As String In Form1.countries
             countryform.ListBox1.Items.Add(obj)
         Next
     End Sub
+    Sub WP_Spon_finish()
+        Display_list(selected, "Introduce " & InputBox("Name of the working paper?", Form1.Title, "Working Paper "), form)
+        Ctimer.note = "Introduce WP"
+        Ctimer.type = 2
+        Ctimer.total = CInt(InputBox("Total time?", Form1.Title))
+        Ctimer.init()
+    End Sub
+    Sub Am_Spon_finish()
+        Dim am As Amendment = New Amendment
+        am.sponsors = selected
+        am.unfriendly = IIf(MsgBox("Friendly?", vbYesNo, Form1.Title), MsgBoxResult.No, MsgBoxResult.Yes)
+        If am.unfriendly Then
+            Display_list(selected, "Introduce " & InputBox("Name of the amendment?", Form1.Title, "Amendment "), form)
+            Ctimer.note = "Introduce Amendment"
+            Ctimer.type = 2
+            Ctimer.total = CInt(InputBox("Total time?", Form1.Title))
+            Ctimer.init()
+        End If
+        Form1.amendment.Add(am)
+    End Sub
+    Sub DR_Spon_finish()
+        Dim CDR_Sign As DR_Sign = New DR_Sign
+        CDR_Sign.sender = Me
+        CDR_Sign.note = "Select signatories"
+        CDR_Sign.ordered = False
+        AddHandler CDR_Sign.finish, AddressOf CDR_Sign.DR_Sign_finish
+    End Sub
     Event finish()
+End Class
+Class DR_Sign
+    Inherits country_select
+    Friend sender As country_select
+    Sub DR_Sign_finish()
+        Dim dr As Resolution = New Resolution
+        dr.signatories = selected
+        dr.sponsors = sender.selected
+        Display_list(selected, "Introduce " & InputBox("Name of the resolution?", Form1.Title, "Draft Resolution "), form)
+        Ctimer.note = "Introduce Draft Resolution"
+        Ctimer.type = 2
+        Ctimer.total = CInt(InputBox("Total time?", Form1.Title))
+        Ctimer.init()
+        Form1.resolutions.Add(dr)
+    End Sub
 End Class
 Class SL_Apprehend
     Inherits country_select
